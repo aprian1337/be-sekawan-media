@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">StakeholderCredentials</h1>
+                    <h1 class="m-0">{{Request::is('*/admin*') ? 'AdminCredentials' : 'StakeholderCredentials'}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -44,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($stakeholder as $data)
+                            @foreach ($credentials as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->users->name }}</td>
@@ -111,7 +111,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('super.credentials.admin.store') }}" method="POST">
+                <form action="{{ Request::is('*/admin*') ? route('super.credentials.admin.store') : route('super.credentials.stakeholder.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -194,7 +194,11 @@
 
         $(document).ready(function() {
             $('.btn-delete').on('click', function() {
+                @if(Request::is('*/admin*'))
+                $('#form-delete').attr('action', '/super/credentials/admin/' + $(this).data('id'))
+                @else
                 $('#form-delete').attr('action', '/super/credentials/stakeholder/' + $(this).data('id'))
+                @endif
                 $('#deleteModal').modal('show')
             })
 
@@ -203,7 +207,11 @@
             })
 
             $('.btn-lupa').on('click', function() {
+                @if(Request::is('*/admin*'))
+                $('#formLupa').attr('action', '/super/credentials/admin/' + $(this).data('id') + '/forget')
+                @else
                 $('#formLupa').attr('action', '/super/credentials/stakeholder/' + $(this).data('id') + '/forget')
+                @endif
                 $('#lupaModal').modal('show')
             })
 

@@ -19,11 +19,17 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+        if($request->is('*/admin*')){
+            if(Auth::guard('admin')->check() == 1){
+                return redirect()->route('admin.dashboard.index');
+            }
+        }else if($request->is('*/stakeholder*')){
+            if(Auth::guard('stakeholder')->check() == 1){
+                return redirect()->route('stakeholder.dashboard.index');
+            }
+        }else{
+            if(Auth::guard('super')->check() == 1){
+                return redirect()->route('super.dashboard.index');
             }
         }
 

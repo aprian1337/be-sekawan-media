@@ -27,7 +27,7 @@
             <li class="nav-item">
                 <a href="{{ route('super.users.index') }}"
                     class="nav-link {{ Request::is('*/users*') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-box-open"></i>
+                    <i class="nav-icon fas fa-user"></i>
                     <p>
                         Users
                     </p>
@@ -35,7 +35,7 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <i class="nav-icon fas fas fa-user-lock"></i>
                     <p>
                         Credentials
                         <i class="right fas fa-angle-left"></i>
@@ -43,13 +43,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="pages/charts/chartjs.html" class="nav-link">
+                        <a href="{{route('super.credentials.admin.index')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Admin</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="{{route('super.credentials.stakeholder.index')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Stakeholder</p>
                         </a>
@@ -57,12 +57,15 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#!" class="nav-link {{ Request::is('*suppliers*') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-shopping-basket"></i>
+                <form action="{{route('auth.super.logout')}}" method="POST">
+                @csrf
+                <button type="submit" class="nav-link {{ Request::is('*suppliers*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>
                         Logout
                     </p>
-                </a>
+                </button>
+            </form>
             </li>
         </ul>
     </nav>

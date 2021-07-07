@@ -21,7 +21,8 @@ class AuthController extends Controller
     }
 
     public function superLogout(){
-
+        Auth::guard('super')->logout();
+        return redirect()->route('auth.super.index')->with('success', 'Logout berhasil');
     }
 
 
