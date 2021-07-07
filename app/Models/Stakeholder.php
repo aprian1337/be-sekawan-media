@@ -15,7 +15,7 @@ class Stakeholder extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
-    public function approvals(){
-        return $this->hasMany(Approval::class);
+    public function requests(){
+        return $this->hasMany(Request::class);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('auth')->group(function(){
+    Route::prefix('admin')->group(function(){
+        Route::get('login', [AuthController::class, 'index'])->name('auth.admin.index');
+    });
+
+    Route::prefix('stakeholder')->group(function(){
+
+    });
+
+    Route::prefix('super4dm1n')->group(function(){
+
+    });
 });

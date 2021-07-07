@@ -18,7 +18,7 @@ class Request extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
-    public function approvals(){
-        return $this->hasMany(Approval::class);
+    public function stakeholders(){
+        return $this->belongsTo(Stakeholder::class);
     }
 }
