@@ -80,7 +80,7 @@
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
                             <a href="{{ route('super.users.index') }}" class="m-1 btn btn-outline-danger">Back</a>
-                            <button type="submit" class="m-1 btn btn-success">Create</button>
+                            <button type="submit" class="m-1 btn btn-success">Update</button>
                         </div>
                     </div>
                 </form>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Super\CredentialsController;
 use App\Http\Controllers\Super\UserController;
+use App\Http\Controllers\Super\VehiclesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,6 +63,9 @@ Route::prefix('auth')->group(function(){
 Route::prefix('super')->middleware('auth.super')->group(function(){
     Route::get('dashboard', [DashboardController::class, 'super'])->name('super.dashboard.index');
     Route::resource('users', UserController::class, [
+        'as' => 'super'
+    ]);
+    Route::resource('vehicles', VehiclesController::class, [
         'as' => 'super'
     ]);
     Route::prefix('credentials')->group(function(){

@@ -33,8 +33,8 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
+            <li class="nav-item {{Request::is('*/credentials*') ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{Request::is('*/credentials*') ? 'active' : ''}}">
                     <i class="nav-icon fas fas fa-user-lock"></i>
                     <p>
                         Credentials
@@ -43,19 +43,29 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('super.credentials.admin.index')}}" class="nav-link">
+                        <a href="{{route('super.credentials.admin.index')}}" class="nav-link {{Request::is('*/credentials/admin*') ? 'active' : ''}}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Admin</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('super.credentials.stakeholder.index')}}" class="nav-link">
+                        <a href="{{Request::is('*/credentials/stakeholder*') ? 'active' : ''}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Stakeholder</p>
                         </a>
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('super.vehicles.index') }}"
+                    class="nav-link {{ Request::is('*/vehicles*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-truck-pickup"></i>
+                    <p>
+                        Kendaraan
+                    </p>
+                </a>
+            </li>
+            <br>
             <li class="nav-item">
                 <form action="{{route('auth.super.logout')}}" method="POST">
                 @csrf
