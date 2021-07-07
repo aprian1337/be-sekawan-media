@@ -41,6 +41,21 @@ return [
             'provider' => 'users',
         ],
 
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'stakeholder' => [
+            'driver' => 'session',
+            'provider' => 'stakeholders',
+        ],
+
+        'super' => [
+            'driver' => 'session',
+            'provider' => 'superadmins',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -69,6 +84,21 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+        'stakeholders' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Stakeholder::class,
+        ],
+
+        'superadmins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Superadmin::class,
         ],
 
         // 'users' => [

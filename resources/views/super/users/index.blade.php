@@ -1,17 +1,17 @@
 @extends('layouts.master')
-@section('title', 'Suppliers')
+@section('title', 'Users')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Suppliers</h1>
+                    <h1 class="m-0">Users</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Suppliers</li>
+                        <li class="breadcrumb-item"><a href="{{ route('super.dashboard.index') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Users</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,8 +26,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Data table of suppliers</h3>
-                        <a href="{{ route('suppliers.create') }}" class="btn btn-sm btn-success"><i
+                        <h3 class="card-title">Data users</h3>
+                        <a href="{{ route('super.users.create') }}" class="btn btn-sm btn-success"><i
                                 class="fas fa-plus"></i>
                             Create</a>
                     </div>
@@ -38,27 +38,28 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Telp</th>
-                                <th>Total Product</th>
+                                <th>Nama</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Alamat</th>
+                                <th>No. HP</th>
+                                <th>Email</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($suppliers as $supplier)
+                            @foreach ($users as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $supplier->name }}</td>
-                                    <td>{{ $supplier->telp }}</td>
-                                    <td>{{ $supplier->products->count() }}</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->gender == 'male' ? 'Pria' : 'Perempuan' }}</td>
+                                    <td>{{ $data->address }}</td>
+                                    <td>{{ $data->phone }}</td>
+                                    <td>{{ $data->email }}</td>
                                     <td>
-                                        <a href="{{ route('suppliers.edit', [$supplier->id]) }}"
+                                        <a href="{{ route('super.users.edit', [$data->id]) }}"
                                             class="btn btn-warning float-left m-1">Edit</a>
-                                        <form class="float-left m-1" action="{{ route('suppliers.destroy', [$supplier->id]) }}" method="POST">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger">Delete</a>
-                                        </form>
+                                        <button" class="btn btn-danger btn-delete m-1" data-id="{{ $data->id }}">
+                                            Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -66,9 +67,11 @@
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Telp</th>
-                                <th>Total Product</th>
+                                <th>Nama</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Alamat</th>
+                                <th>No. HP</th>
+                                <th>Email</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -78,6 +81,32 @@
             </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah kamu yakin ingin menghapus data ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak Jadi</button>
+                    <form class="float-left m-1" method="POST" id="form-delete">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Iya, Hapus</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @push('script')
     <!-- DataTables -->
@@ -92,6 +121,13 @@
                 "autoWidth": false,
             });
         });
+
+        $(document).ready(function() {
+            $('.btn-delete').on('click', function() {
+                $('#form-delete').attr('action', '/super/users/'+$(this).data('id'))
+                $('#deleteModal').modal('show')
+            })
+        })
 
     </script>
 @endpush
