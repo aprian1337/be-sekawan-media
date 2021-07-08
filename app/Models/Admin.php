@@ -11,6 +11,6 @@ class Admin extends Authenticatable
     protected $guarded = [];
 
     public function users(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

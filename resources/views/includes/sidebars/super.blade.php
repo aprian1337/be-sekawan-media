@@ -37,7 +37,7 @@
                 <a href="#" class="nav-link {{Request::is('*/credentials*') ? 'active' : ''}}">
                     <i class="nav-icon fas fas fa-user-lock"></i>
                     <p>
-                        Credentials
+                        Kredensial
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{Request::is('*/credentials/stakeholder*') ? 'active' : ''}}" class="nav-link">
+                        <a href="{{route('super.credentials.stakeholder.index')}}" class="nav-link {{Request::is('*/credentials/stakeholder*') ? 'active' : ''}}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Stakeholder</p>
                         </a>

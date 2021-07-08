@@ -21,12 +21,12 @@ class CredentialsController extends Controller
 
     public function adminStore(Request $request){
         $request->validate([
-            'users_id'=>'required|unique:admins',
+            'user_id'=>'required|unique:admins',
             'password'=>'required',
             'username'=>'required|unique:admins'
         ]);
         Admin::create([
-            'users_id'=> $request->users_id,
+            'user_id'=> $request->user_id,
             'username' => $request->username,
             'password' => bcrypt($request->password)
         ]);
@@ -54,12 +54,12 @@ class CredentialsController extends Controller
 
     public function stakeholderStore(Request $request){
         $request->validate([
-            'users_id'=>'required|unique:admins',
+            'user_id'=>'required|unique:admins',
             'password'=>'required',
             'username'=>'required|unique:admins'
         ]);
         Stakeholder::create([
-            'users_id'=> $request->users_id,
+            'user_id'=> $request->user_id,
             'username' => $request->username,
             'password' => bcrypt($request->password)
         ]);
@@ -80,15 +80,4 @@ class CredentialsController extends Controller
         ]);
         return redirect()->back()->with('success', 'Berhasil menambahkan data credential');
     }
-
-    public function apiSearch(Request $request)
-    {
-        $user = User::where('name', 'LIKE', '%' . $request->input('term', '') . '%')
-            ->get([
-                'id as id',
-                'name as text',
-                ]);
-        return ['results' => $user];
-    }
-    
 }

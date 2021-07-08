@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\RequestController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Stakeholder\ApprovalController;
 use App\Http\Controllers\Super\CredentialsController;
 use App\Http\Controllers\Super\UserController;
 use App\Http\Controllers\Super\VehiclesController;
@@ -32,9 +35,9 @@ Route::prefix('auth')->group(function(){
     });
 
     Route::prefix('stakeholder')->group(function(){
-        Route::get('login', [AuthController::class, 'index'])->middleware('guest')->name('auth.stake.index');
-        Route::post('login', [AuthController::class, 'stakeLogin'])->middleware('guest')->name('auth.stake.login');
-        Route::post('logout', [AuthController::class, 'stakeLogout'])->name('auth.stake.logout');
+        Route::get('login', [AuthController::class, 'index'])->middleware('guest')->name('auth.stakeholder.index');
+        Route::post('login', [AuthController::class, 'stakeLogin'])->middleware('guest')->name('auth.stakeholder.login');
+        Route::post('logout', [AuthController::class, 'stakeLogout'])->name('auth.stakeholder.logout');
     });
 
     Route::prefix('super4dmin')->group(function(){
@@ -69,14 +72,14 @@ Route::prefix('super')->middleware('auth.super')->group(function(){
         'as' => 'super'
     ]);
     Route::prefix('credentials')->group(function(){
-        Route::prefix('admin')->group(function(){
+        Route::prefix('admins')->group(function(){
             Route::get('', [CredentialsController::class, 'index'])->name('super.credentials.admin.index');
             Route::post('', [CredentialsController::class, 'adminStore'])->name('super.credentials.admin.store');
             Route::post('{id}/forget', [CredentialsController::class, 'adminForget'])->name('super.credentials.admin.forget');
             Route::delete('{id}', [CredentialsController::class, 'adminDestroy'])->name('super.credentials.admin.destroy');
         });
 
-        Route::prefix('stakeholder')->group(function(){
+        Route::prefix('stakeholders')->group(function(){
             Route::get('', [CredentialsController::class, 'index'])->name('super.credentials.stakeholder.index');
             Route::post('', [CredentialsController::class, 'stakeholderStore'])->name('super.credentials.stakeholder.store');
             Route::post('{id}/forget', [CredentialsController::class, 'stakeholderForget'])->name('super.credentials.stakeholder.forget');
@@ -103,8 +106,11 @@ Route::prefix('super')->middleware('auth.super')->group(function(){
 | ADMIN START
 |--------------------------------------------------------------------------
 */
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware('auth.admin')->group(function(){
     Route::get('dashboard', [DashboardController::class, 'admin'])->name('admin.dashboard.index');
+    Route::resource('requests', RequestController::class, [
+        'as' => 'admin'
+    ]);
 });
 /*
 |++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -126,8 +132,11 @@ Route::prefix('admin')->group(function(){
 | STAKEHOLDER START
 |--------------------------------------------------------------------------
 */
-Route::prefix('stakeholder')->group(function(){
+Route::prefix('stakeholder')->middleware('auth.stakeholder')->group(function(){
     Route::get('dashboard', [DashboardController::class, 'stakeholder'])->name('stakeholder.dashboard.index');
+    Route::get('approvals', [ApprovalController::class, 'index'])->name('stakeholder.approvals.index');
+    Route::post('approvals/{id}/acc', [ApprovalController::class, 'acc'])->name('stakeholder.approvals.accept');
+    Route::post('approvals/{id}/dec', [ApprovalController::class, 'dec'])->name('stakeholder.approvals.decline');
 });
 /*
 |++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

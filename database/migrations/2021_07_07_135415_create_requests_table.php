@@ -15,11 +15,11 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('vehicles_id')->on('vehicles')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('stakeholders_id')->on('stakeholders')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('vehicle_id')->on('vehicles')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('stakeholder_id')->on('stakeholders')->onUpdate('cascade')->onDelete('cascade');
             $table->tinyInteger('approval_take')->nullable();
-            $table->tinyInteger('approval_return')->nullable();
+            $table->tinyInteger('approval_use')->nullable();
             $table->timestamps();
         });
     }

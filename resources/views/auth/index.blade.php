@@ -10,7 +10,7 @@
         <p class="login-box-msg">Sign in to start your session</p>
 
         <form
-            action="{{ Request::is('*/admin*') ? route('auth.admin.login') : (Request::is('*/stakeholder*') ? route('auth.admin.login') : route('auth.super.login')) }}"
+            action="{{ Request::is('*/admin*') ? route('auth.admin.login') : (Request::is('*/stakeholder*') ? route('auth.stakeholder.login') : route('auth.super.login')) }}"
             method="post">
             @csrf
             <div class="input-group mb-3">

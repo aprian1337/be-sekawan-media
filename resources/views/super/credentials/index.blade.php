@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="table-suppliers" class="table table-bordered table-striped">
+                    <table id="table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -117,7 +117,7 @@
                         <div class="form-group">
                             <div id="dropdown-user">
                                 <label for="user">Nama User</label>
-                                <select id="user" class="search form-control" style="width:100%;" name="users_id"></select>
+                                <select id="user" class="search form-control" style="width:100%;" name="user_id"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -186,7 +186,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script>
         $(function() {
-            $("#table-suppliers").DataTable({
+            $("#table").DataTable({
                 "responsive": true,
                 "autoWidth": false,
             });
@@ -195,9 +195,9 @@
         $(document).ready(function() {
             $('.btn-delete').on('click', function() {
                 @if(Request::is('*/admin*'))
-                $('#form-delete').attr('action', '/super/credentials/admin/' + $(this).data('id'))
+                $('#form-delete').attr('action', '/super/credentials/admins/' + $(this).data('id'))
                 @else
-                $('#form-delete').attr('action', '/super/credentials/stakeholder/' + $(this).data('id'))
+                $('#form-delete').attr('action', '/super/credentials/stakeholders/' + $(this).data('id'))
                 @endif
                 $('#deleteModal').modal('show')
             })
@@ -208,9 +208,9 @@
 
             $('.btn-lupa').on('click', function() {
                 @if(Request::is('*/admin*'))
-                $('#formLupa').attr('action', '/super/credentials/admin/' + $(this).data('id') + '/forget')
+                $('#formLupa').attr('action', '/super/credentials/admins/' + $(this).data('id') + '/forget')
                 @else
-                $('#formLupa').attr('action', '/super/credentials/stakeholder/' + $(this).data('id') + '/forget')
+                $('#formLupa').attr('action', '/super/credentials/stakeholders/' + $(this).data('id') + '/forget')
                 @endif
                 $('#lupaModal').modal('show')
             })
@@ -220,7 +220,7 @@
                 minimumInputLength: 3,
                 placeholder: 'Masukkan Nama Users',
                 ajax: {
-                    url: '{{ route('api.users.search') }}',
+                    url: '{{ route('api.usersall.search') }}',
                     dataType: 'json',
                 },
             });

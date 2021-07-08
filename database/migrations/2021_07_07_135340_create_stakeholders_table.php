@@ -15,7 +15,7 @@ class CreateStakeholdersTable extends Migration
     {
         Schema::create('stakeholders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('username')->nullable();
             $table->string('password');
             $table->timestamps();

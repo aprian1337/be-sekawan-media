@@ -35,7 +35,8 @@ class AuthController extends Controller
     }
 
     public function adminLogout(){
-
+        Auth::guard('admin')->logout();
+        return redirect()->route('auth.admin.index')->with('success', 'Logout berhasil');
     }
 
 
@@ -49,7 +50,8 @@ class AuthController extends Controller
     }
 
     public function stakeLogout(){
-
+        Auth::guard('stakeholder')->logout();
+        return redirect()->route('auth.stakeholder.index')->with('success', 'Logout berhasil');
     }
     
 }

@@ -11,14 +11,14 @@ class Request extends Model
     protected $guarded = [];
 
     public function users(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function vehicles(){
-        return $this->belongsTo(Vehicle::class);
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 
     public function stakeholders(){
-        return $this->belongsTo(Stakeholder::class);
+        return $this->belongsTo(Stakeholder::class, 'stakeholder_id');
     }
 }

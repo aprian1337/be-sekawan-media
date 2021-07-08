@@ -72,7 +72,14 @@
                 <span class="brand-text font-weight-light">SIMAKEN</span>
             </a>
 
+            @if(Request::is('*admin/*'))
+            @include('includes.sidebars.admin')
+            @elseif(Request::is('*stakeholder/*'))
+            @include('includes.sidebars.stakeholder')
+            @else
             @include('includes.sidebars.super')
+            @endif
+            
 
             <!-- /.sidebar -->
         </aside>

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Approval;
+use App\Models\Request as ModelsRequest;
 use App\Models\Stakeholder;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -19,10 +22,13 @@ class DashboardController extends Controller
     }    
 
     public function admin(){
+        return view('admin.dashboard.index');
         
     }    
 
     public function stakeholder(){
+        $approval = ModelsRequest::where('stakeholder_id', Auth::guard('stakeholder')->user()->id)->count();
+        return view('stakeholder.dashboard.index', compact('approval'));
         
     }
 }

@@ -34,7 +34,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="table-suppliers" class="table table-bordered table-striped">
+                    <table id="table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -110,7 +110,7 @@
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     <script>
         $(function() {
-            $("#table-suppliers").DataTable({
+            $("#table").DataTable({
                 "responsive": true,
                 "autoWidth": false,
             });
