@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
-    Route::get('usersall/search', [ApiController::class, 'usersaAll'])->name('api.usersall.search');
+    Route::get('usersall/search', [ApiController::class, 'usersAll'])->name('api.usersall.search');
     Route::get('users/search', [ApiController::class, 'users'])->name('api.users.search');
     Route::get('vehicle/search', [ApiController::class, 'vehicle'])->name('api.vehicle.search');
     Route::get('stakeholder/search', [ApiController::class, 'stakeholder'])->name('api.stakeholder.search');
