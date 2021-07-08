@@ -1,6 +1,10 @@
-PHP VERSION : PHP 8
-DB VERSION : MySQL Ver 15.1 Distrib 10.5.10-MariaDB
-Framework : Laravel 8.4
+*PHP VERSION : PHP 8*
+
+*DB VERSION : MySQL Ver 15.1 Distrib 10.5.10-MariaDB*
+
+*Framework : Laravel 8.4*
+
+---
 
 Cara Instalasi : 
 
