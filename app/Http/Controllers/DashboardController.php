@@ -22,8 +22,8 @@ class DashboardController extends Controller
     }    
 
     public function admin(){
-        return view('admin.dashboard.index');
-        
+        $approval = ModelsRequest::count();
+        return view('admin.dashboard.index', compact('approval'));
     }    
 
     public function stakeholder(){
