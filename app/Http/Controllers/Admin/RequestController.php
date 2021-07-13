@@ -47,7 +47,7 @@ class RequestController extends Controller
         ]);
         ModelsRequest::create([
             'user_id' => $request->user_id,
-            'stakeholder_id' => Stakeholder::findOrFail($request->user_stake_id)->id,
+            'stakeholder_id' => User::findOrFail($request->user_stake_id)->stakeholders->first()->id,
             'vehicle_id' => $request->vehicle_id
         ]);
         return redirect()->back()->with('success', 'Berhasil menambahkan permintaan baru');
